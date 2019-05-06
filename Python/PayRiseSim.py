@@ -22,7 +22,16 @@ def payrise (salaryList, rise, p):
     salaryList.sort()
     return (salaryList)
 
+def gini(salaryList):
+    n = len(salaryList)
+    ginisum = 0
+    for index in range(len(salaryList)):    
+        ginisum = ginisum+ (n+1-index)*salaryList[index]
+    giniValue = 1/n*(n+1-2*((ginisum)/(sum(salaryList))))
+    return (giniValue)
+
 def plotter(salaryList):
+    year = 0
     y = salaryList
     N = len(y)
     x = range(N)
@@ -30,8 +39,11 @@ def plotter(salaryList):
     plt.ion()
     graph = plt.bar(x, y, width, color="blue")#[0]
     while min(salaryList)/max(salaryList) < 0.9:
-        salaryList = payrise (salaryList, 0.02, 0.9)
-        print (salaryList)
+        salaryList = payrise (salaryList, 0.02, 1)
+        g = gini(salaryList)
+        print (year, g)
+        year = year + 1
+        #print (salaryList)
         for rect, h in zip(graph, x):
             rect.set_height(salaryList[h])
         #y[0] = y[0]*1.01
