@@ -4,10 +4,10 @@ from random import uniform
 
 def newCompany(staffCount, minPay, maxPay):
     salaryList = []
-    minP = pow(minPay,1/4)
-    maxP = pow(maxPay,1/4)
+    minP = np.log10(minPay)
+    maxP = np.log10(maxPay)
     for staffMember in range (0, staffCount):
-        tempPay = pow(uniform(minP, maxP),4)
+        tempPay = pow(10,uniform(minP, maxP))
         salaryList.append(tempPay)
     salaryList.sort()
     return (salaryList)
@@ -52,6 +52,9 @@ def plotter(salaryList):
         axes.set_ylim([0,max(salaryList)*1.2])
         plt.draw()
         plt.pause(0.1)
+    print ("Final Salaries:")
+    print (salaryList)
+
 
 def main():
     salaryList = newCompany(1000, 10000, 100000)
