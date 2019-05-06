@@ -14,10 +14,11 @@ def newCompany(staffCount, minPay, maxPay):
 
 def payrise (salaryList, rise, p):
     TotalSalary = sum(salaryList)
-    k = min(len(salaryList)-1, max(salaryList)/TotalSalary)
+    k = min(len(salaryList)-1, (TotalSalary/max(salaryList)))
     pk = k*p
     for index in range(len(salaryList)):
-        salaryList[index] = salaryList[index]+rise*((TotalSalary - salaryList[index]*pk)/(len(salaryList)-pk))
+        tempSalary = salaryList[index]+rise*((TotalSalary - salaryList[index]*pk)/(len(salaryList)-pk))
+        salaryList[index] = tempSalary
     salaryList.sort()
     return (salaryList)
 
@@ -29,7 +30,7 @@ def plotter(salaryList):
     plt.ion()
     graph = plt.bar(x, y, width, color="blue")#[0]
     while min(salaryList)/max(salaryList) < 0.9:
-        salaryList = payrise (salaryList, 0.05, 1)
+        salaryList = payrise (salaryList, 0.02, 0.9)
         print (salaryList)
         for rect, h in zip(graph, x):
             rect.set_height(salaryList[h])
@@ -41,7 +42,7 @@ def plotter(salaryList):
         plt.pause(0.1)
 
 def main():
-    salaryList = newCompany(100, 10000, 100000)
+    salaryList = newCompany(1000, 10000, 100000)
     print(salaryList)
     plotter(salaryList)
 
