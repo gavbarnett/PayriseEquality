@@ -24,10 +24,11 @@ def payrise (salaryList, rise, p):
 
 def gini(salaryList):
     n = len(salaryList)
+    salaryList.sort()
     ginisum = 0
     for index in range(len(salaryList)):    
-        ginisum = ginisum+ (n+1-index)*salaryList[index]
-    giniValue = 1/n*(n+1-2*((ginisum)/(sum(salaryList))))
+        ginisum = ginisum+ (n+1-index-1)*salaryList[index]
+    giniValue = (1/n)*(n+1-2*((ginisum)/(sum(salaryList))))
     return (giniValue)
 
 def plotter(salaryList):
@@ -57,7 +58,7 @@ def plotter(salaryList):
 
 
 def main():
-    salaryList = newCompany(1000, 10000, 100000)
+    salaryList = newCompany(10, 10000, 1000000)
     print(salaryList)
     plotter(salaryList)
 
